@@ -1,0 +1,32 @@
+image: cirrusci/flutter:stable
+
+stages:
+  - test
+  - build
+
+variables:
+  FLUTTER_VERSION: stable
+
+test:
+  stage: test
+  script:
+    - echo "Current directory:"
+    - pwd  # Prikaže trenutno delovno mapo
+    - echo "Listing directory contents:"
+    - ls -la  # Prikaže vsebino trenutne mape
+    - flutter pub get  # Namesti odvisnosti
+    - flutter test  # Zažene teste
+
+build:
+  stage: build
+  script:
+    - echo "Current directory:"
+    - pwd  # Prikaže trenutno delovno mapo
+    - echo "Listing directory contents:"
+    - ls -la  # Prikaže vsebino trenutne mape
+    - flutter pub get  # Namesti odvisnosti
+    - flutter build apk --release  # Gradnja APK
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-release.apk  # Pot do gradnje
+    expire_in: 1 week  # Artefakti so na voljo 1 teden
